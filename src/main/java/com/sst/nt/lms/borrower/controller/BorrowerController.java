@@ -48,7 +48,7 @@ public class BorrowerController {
 	 * @return Loans if created correctly with an appropriate http code, else an
 	 *         appropriate http error code
 	 */
-	@PostMapping(path = "/borrower/{cardNo}/branch/{branchId}/book/{bookId}")
+	@PostMapping(path = "/borrowers/{cardNo}/branches/{branchId}/books/{bookId}")
 	public ResponseEntity<Loan> borrowBook(@PathVariable("cardNo") final int cardNo,
 			@PathVariable("branchId") final int branchId,
 			@PathVariable("bookId") final int bookId) {
@@ -106,7 +106,7 @@ public class BorrowerController {
 	 *                              not exist or if the search for the book copies
 	 *                              list failed.
 	 */
-	@GetMapping(path = "/branch/{branchId}/copies")
+	@GetMapping(path = "/branches/{branchId}/copies")
 	public ResponseEntity<List<BranchCopies>> getAllBranchCopies(
 			@PathVariable("branchId") final int branchId) {
 		try {
@@ -141,7 +141,7 @@ public class BorrowerController {
 	 *                              deleting the entry
 	 */
 	// FIXME: This should have 'loan' somewhere in the path!
-	@DeleteMapping(path = "/borrower/{cardNo}/branch/{branchId}/book/{bookId}")
+	@DeleteMapping(path = "/borrowers/{cardNo}/branches/{branchId}/books/{bookId}")
 	public ResponseEntity<String> returnBook(
 			@PathVariable("cardNo") final int cardNo,
 			@PathVariable("branchId") final int branchId,
@@ -191,7 +191,7 @@ public class BorrowerController {
 	 * @throws TransactionException retrieve exception if it cannot find the given
 	 *                              borrower
 	 */
-	@GetMapping(path = "/borrower/{cardNo}/branches") // FIXME: Should somehow indicate this is branches *with an outstanding loan* ...
+	@GetMapping(path = "/borrowers/{cardNo}/branches") // FIXME: Should somehow indicate this is branches *with an outstanding loan* ...
 	public ResponseEntity<List<Branch>> getAllBranchesWithLoan(
 			@PathVariable("cardNo") final int cardNo) {
 		try {
@@ -221,7 +221,7 @@ public class BorrowerController {
 	 * @throws TransactionException retrieve exception if it cannot find the given
 	 *                              borrower
 	 */
-	@GetMapping(path = "/borrower/{cardNo}/loans")
+	@GetMapping(path = "/borrowers/{cardNo}/loans")
 	public ResponseEntity<List<Loan>> getAllBorrowedBooks(
 			@PathVariable("cardNo") final int cardNo) {
 		try {
@@ -249,7 +249,7 @@ public class BorrowerController {
 	 * @throws TransactionException retrieve exception if it cannot find the
 	 *                              requested borrower
 	 */
-	@GetMapping(path = "/borrower/{cardNo}")
+	@GetMapping(path = "/borrowers/{cardNo}")
 	public ResponseEntity<Borrower> getBorrowerById(
 			@PathVariable("cardNo") final int cardNo) {
 		try {
@@ -276,7 +276,7 @@ public class BorrowerController {
 	 * @throws TransactionException retrieve exception if it cannot find the
 	 *                              requested branch
 	 */
-	@GetMapping(path = "/branch/{branchId}")
+	@GetMapping(path = "/branches/{branchId}")
 	public ResponseEntity<Branch> getbranch(
 			@PathVariable("branchId") final int branchId) {
 		try {
@@ -303,7 +303,7 @@ public class BorrowerController {
 	 * @throws TransactionException retrieve exception if it cannot find the
 	 *                              requested book
 	 */
-	@GetMapping(path = "/book/{bookId}")
+	@GetMapping(path = "/books/{bookId}")
 	public ResponseEntity<Book> getBook(@PathVariable("bookId") final int bookId) {
 		try {
 			final Book foundBook = borrowerService.getBook(bookId);
@@ -331,7 +331,7 @@ public class BorrowerController {
 	 * @throws TransactionException send an internal server error code if rollback
 	 *                              fails, else sends a not found code
 	 */
-	@GetMapping(path = "/borrower/{cardNo}/branch/{branchId}/book/{bookId}")
+	@GetMapping(path = "/borrowers/{cardNo}/branches/{branchId}/books/{bookId}")
 	public ResponseEntity<Loan> getLoanByIds(
 			@PathVariable("cardNo") final int cardNo,
 			@PathVariable("branchId") final int branchId,

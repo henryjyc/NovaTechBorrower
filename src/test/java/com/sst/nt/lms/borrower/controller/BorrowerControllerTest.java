@@ -46,6 +46,6 @@ public class BorrowerControllerTest {
 	@Disabled("Requires databse setup that isn't provided here")
 	@Test
 	public void testGetBorrower() throws Exception {
-		mockMvc.perform(get("/borrower/1")).andExpect(status().isOk());
+		mockMvc.perform(get("/borrowers/1")).andExpect(status().isOk());
 	}
 }

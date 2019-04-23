@@ -161,16 +161,13 @@ public class BorrowerController {
 				final Boolean success = borrowerService.returnBook(borrower, book,
 						branch, LocalDate.now());
 				if (success == null) {
-					return new ResponseEntity<>("You (" + borrower.getName()
+					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "You (" + borrower.getName()
 							+ ") do not have " + book.getTitle() + " checkout from "
-							+ branch.getName(), HttpStatus.NOT_FOUND);
+							+ branch.getName());
 				} else if (success.booleanValue()) {
-					return new ResponseEntity<>(
-							"Successfully returned " + book.getTitle(),
-							HttpStatus.NO_CONTENT);
+					throw new ResponseStatusException(HttpStatus.NO_CONTENT);
 				} else {
-					return new ResponseEntity<>("This book is overdue",
-							HttpStatus.CONFLICT);
+					throw new ResponseStatusException(HttpStatus.CONFLICT, "This book is overdue");
 				}
 			}
 		} catch (final TransactionException exception) {
